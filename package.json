@@ -4,7 +4,10 @@
   "description": "Building frontend datastructures and algorithms through React",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run frontend & npm run backend",
+    "frontend": "watchify -o public/bundle.js -v -d public/js/main.js",
+    "backend": ""
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,9 @@
   },
   "homepage": "https://github.com/Juan-Ramirez-Alvarez/AlgO#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "watchify": "^3.11.1"
   }
 }
