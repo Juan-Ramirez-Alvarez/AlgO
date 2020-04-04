@@ -20,9 +20,16 @@
   },
   "homepage": "https://github.com/Juan-Ramirez-Alvarez/AlgO#readme",
   "dependencies": {
+    "browserify": "^16.5.1",
     "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "reactify": "^1.1.1",
     "watchify": "^3.11.1"
+  },
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
   }
 }
