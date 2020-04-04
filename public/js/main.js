@@ -5,12 +5,12 @@ var ReactDOM = require('react-dom');
 class Square extends React.Component {
     render() {
       return (
-        <h1>hello world!</h1>
+        <p>hello world!</p>
       );
     }
 }
 
 ReactDOM.render(
-    <Square />,
+    <Square/>,
     document.getElementById('root')
 );
