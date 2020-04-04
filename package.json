@@ -1,0 +1,22 @@
+{
+  "name": "algo",
+  "version": "1.0.0",
+  "description": "Building frontend datastructures and algorithms through React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Juan-Ramirez-Alvarez/AlgO.git"
+  },
+  "author": "Colton & Juan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Juan-Ramirez-Alvarez/AlgO/issues"
+  },
+  "homepage": "https://github.com/Juan-Ramirez-Alvarez/AlgO#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
