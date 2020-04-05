@@ -39,7 +39,9 @@ class App extends React.Component {
   render() {
       return (
         <div>
-          <Header />
+          <Header
+            update={this.updateBodyTag}
+          />
           {this.state.bodytag}
           <Footer/>
         </div>

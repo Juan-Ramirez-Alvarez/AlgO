@@ -1,12 +1,16 @@
 import React from 'react';
 
 export class Header extends React.Component {
+  updateBodyTag(tag) {
+    this.props.update(tag)
+  }
+
   render() {
     return (
       <div>
-          <button>Stack</button>
-          <button>Queue</button>
-          <button>Binary Search</button>
+          <button onClick={() => this.updateBodyTag(<Stack />)}>Stack</button>
+          <button onClick={() => this.updateBodyTag(<Queue />)}>Queue</button>
+          <button onClick={() => this.updateBodyTag(<BinSearch />)}>Binary Search</button>
       </div>
     );
   }  
