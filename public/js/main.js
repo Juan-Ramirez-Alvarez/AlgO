@@ -1,14 +1,7 @@
 // React
-var React = require('react');
-var ReactDOM = require('react-dom');
-
-class Header extends React.Component {
-  render() {
-    return (
-      <div>I am  header</div>
-    );
-  }
-}
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Header} from './header.js';
 
 class Footer extends React.Component {
   render() {
@@ -26,20 +19,21 @@ class Main extends React.Component {
   }
 }
 
-class Stack extends React.Component {
-  render() {
-    return (
-      <div>I am stack</div>
-    );
-  }
-}
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       bodytag: <Main/>,
     };
+    this.updateBodyTag = this.updateBodyTag.bind(this);
+  }
+
+  updateBodyTag(tag) {
+    this.setState(
+      {
+        bodytag: tag
+      }
+    )
   }
 
   render() {
