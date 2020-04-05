@@ -1,16 +1,55 @@
 // React
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Header} from './header.js';
 
-class Square extends React.Component {
-    render() {
+class Footer extends React.Component {
+  render() {
+    return (
+      <div>I am footer</div>
+    );
+  }
+}
+
+class Main extends React.Component {
+  render() {
+    return (
+      <div>I am  main</div>
+    );
+  }
+}
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bodytag: <Main/>,
+    };
+    this.updateBodyTag = this.updateBodyTag.bind(this);
+  }
+
+  updateBodyTag(tag) {
+    this.setState(
+      {
+        bodytag: tag
+      }
+    )
+  }
+
+  render() {
       return (
-        <p>hello world!</p>
+        <div>
+          <Header
+            update={this.updateBodyTag}
+          />
+          {this.state.bodytag}
+          <Footer/>
+        </div>
       );
     }
 }
 
 ReactDOM.render(
-    <Square/>,
-    document.getElementById('root')
+    <App/>,
+    document.getElementById("root")
 );
