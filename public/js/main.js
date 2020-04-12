@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Header} from './header.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Footer extends React.Component {
   render() {
