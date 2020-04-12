@@ -1,15 +1,8 @@
 // React
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {Header} from './header.js';
-
-class Footer extends React.Component {
-  render() {
-    return (
-      <div>I am footer</div>
-    );
-  }
-}
+import {Footer} from './footer.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Main extends React.Component {
   render() {
@@ -19,7 +12,7 @@ class Main extends React.Component {
   }
 }
 
-class App extends React.Component {
+export class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,8 +41,3 @@ class App extends React.Component {
       );
     }
 }
-
-ReactDOM.render(
-    <App/>,
-    document.getElementById("root")
-);

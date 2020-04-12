@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 
 export class Header extends React.Component {
   updateBodyTag(tag) {
@@ -8,9 +9,9 @@ export class Header extends React.Component {
   render() {
     return (
       <div>
-          <button onClick={() => this.updateBodyTag(<Stack />)}>Stack</button>
-          <button onClick={() => this.updateBodyTag(<Queue />)}>Queue</button>
-          <button onClick={() => this.updateBodyTag(<BinSearch />)}>Binary Search</button>
+          <Button onClick={() => this.updateBodyTag(<Stack />)}>Stack</Button>
+          <Button onClick={() => this.updateBodyTag(<Queue />)}>Queue</Button>
+          <Button onClick={() => this.updateBodyTag(<BinSearch />)}>Binary Search</Button>
       </div>
     );
   }  
