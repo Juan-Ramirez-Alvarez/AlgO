@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import {Stack} from './stack.js';
 
 export class Header extends React.Component {
   updateBodyTag(tag) {
@@ -15,14 +16,6 @@ export class Header extends React.Component {
       </div>
     );
   }  
-}
-
-class Stack extends React.Component {
-  render() {
-    return (
-      <div>I am stack</div>
-    );
-  }
 }
 
 class Queue extends React.Component {
