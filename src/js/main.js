@@ -1,15 +1,8 @@
 // React
 import React from 'react';
 import {Header} from './header.js';
+import {Footer} from './footer.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-class Footer extends React.Component {
-  render() {
-    return (
-      <div>I am footer</div>
-    );
-  }
-}
 
 class Main extends React.Component {
   render() {
