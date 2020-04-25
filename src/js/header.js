@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import {Stack} from './stack.js';
+import {StackController} from './stack.js';
 
 export class Header extends React.Component {
   updateBodyTag(tag) {
@@ -10,7 +10,7 @@ export class Header extends React.Component {
   render() {
     return (
       <div>
-          <Button onClick={() => this.updateBodyTag(<Stack />)}>Stack</Button>
+          <Button onClick={() => this.updateBodyTag(<StackController />)}>Stack</Button>
           <Button onClick={() => this.updateBodyTag(<Queue />)}>Queue</Button>
           <Button onClick={() => this.updateBodyTag(<BinSearch />)}>Binary Search</Button>
       </div>

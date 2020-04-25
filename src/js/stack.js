@@ -1,6 +1,6 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
-import { render } from '@testing-library/react';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 const bankSize = 10;
 
@@ -19,7 +19,7 @@ function Bank(props) {
     for(var i = 1; i <= props.bankArray.length; i++) {
         if(i % lengthRow === 0) {
             var row = getTableRow(props.bankArray.slice(start, i))
-            rows.push(<tr>{row}</tr>);
+            rows.push(<tr key={i}>{row}</tr>);
             start = i;
         }
     }
@@ -31,21 +31,38 @@ function Bank(props) {
             </tbody>
         </Table>
     );
+
+    // fuck it
+    function getTableRow(items) {
+        return items.map(function (item, i) {
+            return (
+                <td key={i} className="bankElement"> {item} </td>
+            );
+        });
+    }
 }
 
-function getTableRow(items) {
-    return items.map(function (item, i) {
-        return (
-            <td key={i}> {item} </td>
-        );
-    });
+function Stack(props) {
+    var listItems = []
+    var keyIndex = 0;
+    props.stackArray.slice().reverse().forEach(function(x) {
+        listItems.push(<ListGroup.Item key={keyIndex++}>{x}</ListGroup.Item>)
+    })
+
+    return (
+        <div className="builtStack">
+                  <ListGroup>
+                      {listItems}
+                  </ListGroup>
+        </div>
+    );
 }
 
-export class Stack extends React.Component {
+export class StackController extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          stackArray: new Array(1).fill(getRandomNum()),
+          stackArray: Array.from({length: 5}, (_, randNum) => (getRandomNum())),
           bankArray: Array.from({length: bankSize}, (_, randNum) => (getRandomNum()))
         };
     }
@@ -53,7 +70,7 @@ export class Stack extends React.Component {
     render() {
         return (
             <div>
-              {this.state.stackArray}
+              <Stack stackArray={this.state.stackArray}/>
               <Bank bankArray={this.state.bankArray} />
             </div>
         );
