@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import ListGroup from 'react-bootstrap/ListGroup';
+import "./style.css";
 
 const bankSize = 10;
 
@@ -36,7 +37,7 @@ function Bank(props) {
     function getTableRow(items) {
         return items.map(function (item, i) {
             return (
-                <td key={i} className="bankElement"> {item} </td>
+                <td key={i} className="bankItem"> {item} </td>
             );
         });
     }
@@ -46,7 +47,7 @@ function Stack(props) {
     var listItems = []
     var keyIndex = 0;
     props.stackArray.slice().reverse().forEach(function(x) {
-        listItems.push(<ListGroup.Item key={keyIndex++}>{x}</ListGroup.Item>)
+        listItems.push(<ListGroup.Item className="stackItem" key={keyIndex++}>{x}</ListGroup.Item>)
     })
 
     return (
