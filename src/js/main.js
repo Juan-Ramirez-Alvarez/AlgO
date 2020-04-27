@@ -3,7 +3,9 @@ import React from 'react';
 import {Header} from './header.js';
 import {Footer} from './footer.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './style.css'
+import { DndProvider } from 'react-dnd'
+import Backend from 'react-dnd-html5-backend'
+
 class Main extends React.Component {
   render() {
     return (
@@ -31,13 +33,15 @@ export class App extends React.Component {
 
   render() {
       return (
-        <div>
-          <Header
-            update={this.updateBodyTag}
-          />
-          {this.state.bodytag}
-          <Footer/>
-        </div>
+        <DndProvider backend={Backend}>
+          <div>
+            <Header
+              update={this.updateBodyTag}
+            />
+            {this.state.bodytag}
+            <Footer/>
+          </div>
+        </DndProvider>
       );
     }
 }

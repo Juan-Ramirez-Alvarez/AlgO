@@ -1,9 +1,13 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import ListGroup from 'react-bootstrap/ListGroup';
-import "./style.css";
+import { useDrag, useDrop } from 'react-dnd'
 
 const bankSize = 10;
+
+const ItemTypes = {
+    BANKITEM: 'bankItem',
+  }
 
 function getRandomNum() {
     return Math.trunc(Math.random() * 100);
@@ -26,7 +30,7 @@ function Bank(props) {
     }
 
     return (
-        <Table className="table-hover table-striped table-bordered">
+        <Table className="table-hover table-striped">
             <tbody>
                 {rows}
             </tbody>
@@ -37,24 +41,50 @@ function Bank(props) {
     function getTableRow(items) {
         return items.map(function (item, i) {
             return (
-                <td key={i} className="bankItem"> {item} </td>
+                <BankItem key={i} randnum={item}/>
             );
         });
     }
 }
 
-function Stack(props) {
+function BankItem(props){
+    const [{isDragging}, drag] = useDrag({
+        item: { type: ItemTypes.BANKITEM },
+        collect: monitor => ({
+            isDragging: !!monitor.isDragging(),
+        }),
+    })
+
+    return (
+        <td
+            ref={drag}
+            style={{opacity: isDragging ? 0.5 : 1}}
+            className="bankItem">
+                {props.randnum}
+        </td>
+    );
+}
+
+function Stack(props){
+    const [{ isOver, canDrop }, drop] = useDrop({
+        accept: ItemTypes.BANKITEM,
+        drop: () => props.bankToStack(),
+        collect: mon => ({
+          isOver: !!mon.isOver(),
+          canDrop: !!mon.canDrop(),
+        }),
+      })
+
     var listItems = []
     var keyIndex = 0;
     props.stackArray.slice().reverse().forEach(function(x) {
         listItems.push(<ListGroup.Item className="stackItem" key={keyIndex++}>{x}</ListGroup.Item>)
     })
-
     return (
-        <div className="builtStack">
-                  <ListGroup>
-                      {listItems}
-                  </ListGroup>
+        <div ref={drop} className="builtStack">
+            <ListGroup>
+                {listItems}
+            </ListGroup>
         </div>
     );
 }
@@ -63,15 +93,19 @@ export class StackController extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          stackArray: Array.from({length: 5}, (_, randNum) => (getRandomNum())),
+          stackArray: Array.from({length: 1}, (_, randNum) => (getRandomNum())),
           bankArray: Array.from({length: bankSize}, (_, randNum) => (getRandomNum()))
         };
+    }
+
+    bankToStack() {
+        this.stackArray.push(69);
     }
 
     render() {
         return (
             <div>
-              <Stack stackArray={this.state.stackArray}/>
+              <Stack stackArray={this.state.stackArray} bankToStack={this.bankToStack} />
               <Bank bankArray={this.state.bankArray} />
             </div>
         );
