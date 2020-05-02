@@ -9,7 +9,7 @@ export class Header extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="headerid">
           <Button onClick={() => this.updateBodyTag(<StackController />)}>Stack</Button>
           <Button onClick={() => this.updateBodyTag(<Queue />)}>Queue</Button>
           <Button onClick={() => this.updateBodyTag(<BinSearch />)}>Binary Search</Button>

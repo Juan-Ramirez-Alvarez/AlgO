@@ -30,11 +30,13 @@ function Bank(props) {
     }
 
     return (
+        <div className="bankTable">
         <Table className="table-hover table-striped">
             <tbody>
                 {rows}
             </tbody>
         </Table>
+        </div>
     );
 
     // fuck it
@@ -86,10 +88,19 @@ function Stack(props){
         }),
       })
 
+    console.log(isOver);
+    console.log(canDrop);
     var listItems = []
     var keyIndex = 0;
     props.stackArray.slice().reverse().forEach(function(x) {
-        listItems.push(<ListGroup.Item className="stackItem" key={keyIndex++}>{x}</ListGroup.Item>)
+        // item pushed before it gets identifier removed
+        // give it to the item we are pushing on the list
+        var lastItemButton = null;
+        if (keyIndex === 0) {
+            lastItemButton = <button>click me</button>
+        }
+        
+    listItems.push(<ListGroup.Item className="stackItem" key={keyIndex++}>{x}{lastItemButton}</ListGroup.Item>)
     })
     return (
         <div ref={drop} className="builtStack">
@@ -124,8 +135,10 @@ export class StackController extends React.Component {
     render() {
         return (
             <div>
-              <Stack stackArray={this.state.stackArray} bankToStack={this.bankToStack} />
-              <Bank bankArray={this.state.bankArray} />
+                <div id="customdiv">
+                    <Stack stackArray={this.state.stackArray} bankToStack={this.bankToStack} />
+                </div>
+                <Bank bankArray={this.state.bankArray} />
             </div>
         );
     }

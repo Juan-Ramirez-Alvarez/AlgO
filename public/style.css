@@ -9,8 +9,17 @@ body {
 }
 
 .builtStack {
-    text-align: center;
-    padding: 5em;
+    position: absolute;
+    bottom: 0;
+}
+
+#headerid {
+    padding-bottom: 90%;
+}
+
+#customdiv {
+    position: relative;
+    min-height:25em;
 }
 
 /* !important used to overide bootstrap class attributes */
@@ -28,4 +37,7 @@ body {
     /* override encapsulating table border color */
     border-color: hotpink !important;
     text-align: center;
+}
+
+.bankTable{
 }
