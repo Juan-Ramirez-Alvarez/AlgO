@@ -23,7 +23,7 @@ function Bank(props) {
     var start = 0
     for(var i = 1; i <= props.bankArray.length; i++) {
         if(i % lengthRow === 0) {
-            var row = getTableRow(props.bankArray.slice(start, i))
+            var row = getTableRow(props.bankArray.slice(start, i), i === lengthRow)
             rows.push(<tr key={i}>{row}</tr>);
             start = i;
         }
@@ -38,10 +38,16 @@ function Bank(props) {
     );
 
     // fuck it
-    function getTableRow(items) {
+    // keeping track of getTableRow calls so we can have indices accounting for desired # rows
+    // only works for 2 rows of 5 items
+    function getTableRow(items, isFirstRow) {
         return items.map(function (item, i) {
+            var index = i;
+            if (!isFirstRow) {
+                index += lengthRow;
+            }
             return (
-                <BankItem key={i} randnum={item}/>
+                <BankItem key={index} index={index} randnum={item}/>
             );
         });
     }
@@ -49,7 +55,7 @@ function Bank(props) {
 
 function BankItem(props){
     const [{isDragging}, drag] = useDrag({
-        item: { type: ItemTypes.BANKITEM },
+        item: { type: ItemTypes.BANKITEM, index:props.index},
         collect: monitor => ({
             isDragging: !!monitor.isDragging(),
         }),
@@ -68,7 +74,7 @@ function BankItem(props){
 function Stack(props){
     const [{ isOver, canDrop }, drop] = useDrop({
         accept: ItemTypes.BANKITEM,
-        drop: () => props.bankToStack(),
+        drop: item => props.bankToStack(item.index),
         collect: mon => ({
           isOver: !!mon.isOver(),
           canDrop: !!mon.canDrop(),
@@ -98,8 +104,16 @@ export class StackController extends React.Component {
         };
     }
 
-    bankToStack() {
-        this.stackArray.push(69);
+    bankToStack = (index) => {
+        var stackClone = this.state.stackArray.slice();
+        var bankClone = this.state.bankArray.slice();
+        stackClone.push(this.state.bankArray[index]);
+        bankClone[index] = null;
+
+        this.setState({
+            stackArray: stackClone,
+            bankArray: bankClone,
+        })
     }
 
     render() {
