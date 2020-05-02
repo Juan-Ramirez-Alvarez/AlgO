@@ -61,9 +61,14 @@ function BankItem(props){
         }),
     })
 
+    // only draggable if bankitem exists
+    var refAttr = null;
+    if (props.randnum != null)
+        refAttr = drag;
+
     return (
         <td
-            ref={drag}
+            ref={refAttr}
             style={{opacity: isDragging ? 0.5 : 1}}
             className="bankItem">
                 {props.randnum}
