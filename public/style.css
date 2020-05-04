@@ -1,43 +1,66 @@
-html {
-    display: table;
-    margin: auto;
+/* html {
+
 }
 
 body {
-    display: table-cell;
-    vertical-align: middle;
+
+} */
+
+#mainapp {
+    position: relative;
 }
 
-.builtStack {
+#mainapp #header {
+    height: 10%;
+    /* position: absolute; */
+    /* top: 0; */
+}
+
+#mainapp #temp { 
+    height: 80%;
+    position: relative;
+}
+
+#temp #stackpage {
     position: absolute;
     bottom: 0;
 }
 
-#headerid {
-    padding-bottom: 90%;
+#mainapp #footer {
+    height: 10%;
+    /* position: absolute; */
+    /* bottom: 0; */
 }
 
-#customdiv {
+/* #stackpage #stackwrapper {
     position: relative;
-    min-height:25em;
-}
+    height: 60%;
+} */
+
+/* #stackwrapper #builtStack {
+    position: absolute;
+    bottom: 0;
+} */
 
 /* !important used to overide bootstrap class attributes */
-.stackItem {
+#builtStack .stackItem {
     background-color: greenyellow !important;
     border-style: solid !important;
     border-width: 1px !important;
     border-color: green !important;
 }
 
-.bankItem {
+/* #stackpage #banktable {
+    height: 40%;
+    bottom: 0;
+    position: absolute;
+} */
+
+#banktable .bankItem {
     background-color: pink;
     border-style: solid;
     border-width: 1px;
     /* override encapsulating table border color */
     border-color: hotpink !important;
     text-align: center;
-}
-
-.bankTable{
 }

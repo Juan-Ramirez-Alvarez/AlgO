@@ -34,7 +34,7 @@ export class App extends React.Component {
   render() {
       return (
         <DndProvider backend={Backend}>
-          <div>
+          <div id="mainapp">
             <Header
               update={this.updateBodyTag}
             />

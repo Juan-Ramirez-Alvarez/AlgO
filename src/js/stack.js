@@ -30,7 +30,7 @@ function Bank(props) {
     }
 
     return (
-        <div className="bankTable">
+        <div id="banktable">
         <Table className="table-hover table-striped">
             <tbody>
                 {rows}
@@ -103,10 +103,12 @@ function Stack(props){
     listItems.push(<ListGroup.Item className="stackItem" key={keyIndex++}>{x}{lastItemButton}</ListGroup.Item>)
     })
     return (
-        <div ref={drop} className="builtStack">
-            <ListGroup>
-                {listItems}
-            </ListGroup>
+        <div id="stackwrapper">
+            <div ref={drop} id="builtStack">
+                <ListGroup>
+                    {listItems}
+                </ListGroup>
+            </div>
         </div>
     );
 }
@@ -134,11 +136,11 @@ export class StackController extends React.Component {
 
     render() {
         return (
-            <div>
-                <div id="customdiv">
+            <div id="temp">
+                <div id="stackpage">
                     <Stack stackArray={this.state.stackArray} bankToStack={this.bankToStack} />
+                    <Bank bankArray={this.state.bankArray} />
                 </div>
-                <Bank bankArray={this.state.bankArray} />
             </div>
         );
     }
