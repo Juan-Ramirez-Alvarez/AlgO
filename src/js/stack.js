@@ -30,13 +30,11 @@ function Bank(props) {
     }
 
     return (
-        <div id="banktable">
-        <Table className="table-hover table-striped">
+        <Table className="table-hover table-striped banktable">
             <tbody>
                 {rows}
             </tbody>
         </Table>
-        </div>
     );
 
     // fuck it
