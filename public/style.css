@@ -1,46 +1,32 @@
-/* html {
-
+html {
+    
 }
 
 body {
+}
 
-} */
-
-#mainapp {
-    position: relative;
+#root {
+    max-width: 300px;
+    margin: 0 auto;
 }
 
 #mainapp #header {
     height: 10%;
-    /* position: absolute; */
-    /* top: 0; */
 }
 
-#mainapp #temp { 
+#mainapp #stackpageoutter { 
     height: 80%;
     position: relative;
 }
 
-#temp #stackpage {
+#stackpageoutter #stackpage {
     position: absolute;
     bottom: 0;
 }
 
 #mainapp #footer {
     height: 10%;
-    /* position: absolute; */
-    /* bottom: 0; */
 }
-
-/* #stackpage #stackwrapper {
-    position: relative;
-    height: 60%;
-} */
-
-/* #stackwrapper #builtStack {
-    position: absolute;
-    bottom: 0;
-} */
 
 /* !important used to overide bootstrap class attributes */
 #builtStack .stackItem {
@@ -49,12 +35,6 @@ body {
     border-width: 1px !important;
     border-color: green !important;
 }
-
-/* #stackpage #banktable {
-    height: 40%;
-    bottom: 0;
-    position: absolute;
-} */
 
 #banktable .bankItem {
     background-color: pink;

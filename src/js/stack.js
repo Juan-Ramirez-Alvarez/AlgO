@@ -103,12 +103,10 @@ function Stack(props){
     listItems.push(<ListGroup.Item className="stackItem" key={keyIndex++}>{x}{lastItemButton}</ListGroup.Item>)
     })
     return (
-        <div id="stackwrapper">
-            <div ref={drop} id="builtStack">
-                <ListGroup>
-                    {listItems}
-                </ListGroup>
-            </div>
+        <div ref={drop} id="builtStack">
+            <ListGroup>
+                {listItems}
+            </ListGroup>
         </div>
     );
 }
@@ -136,7 +134,7 @@ export class StackController extends React.Component {
 
     render() {
         return (
-            <div id="temp">
+            <div id="stackpageoutter">
                 <div id="stackpage">
                     <Stack stackArray={this.state.stackArray} bankToStack={this.bankToStack} />
                     <Bank bankArray={this.state.bankArray} />
