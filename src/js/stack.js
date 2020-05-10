@@ -2,6 +2,7 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useDrag, useDrop } from 'react-dnd'
+import { useSpring, animated } from 'react-spring'
 
 const bankSize = 10;
 
@@ -86,20 +87,26 @@ function Stack(props){
         }),
       })
 
-    console.log(isOver);
-    console.log(canDrop);
     var listItems = []
     var keyIndex = 0;
+
+    const [properties, set, stop] = useSpring(() => ({opacity: 1}))
     props.stackArray.slice().reverse().forEach(function(x) {
         // item pushed before it gets identifier removed
         // give it to the item we are pushing on the list
+        set({opacity: 1});
         var lastItemButton = null;
         if (keyIndex === 0) {
-            lastItemButton = <button>click me</button>
+            lastItemButton = <button onClick={() => AnimateAndPop()}>click me</button>
+            listItems.push(<animated.div style={properties}>
+                <ListGroup.Item className="stackItem" key={keyIndex++}>{x}{lastItemButton}</ListGroup.Item>
+                </animated.div>);
         }
-        
-    listItems.push(<ListGroup.Item className="stackItem" key={keyIndex++}>{x}{lastItemButton}</ListGroup.Item>)
+        else {
+            listItems.push(<ListGroup.Item className="stackItem" key={keyIndex++}>{x}{lastItemButton}</ListGroup.Item>)
+        }
     })
+
     return (
         <div ref={drop} id="builtStack">
             <ListGroup id="temp">
@@ -107,6 +114,11 @@ function Stack(props){
             </ListGroup>
         </div>
     );
+
+    function AnimateAndPop ()
+    {
+        props.popFromStack(set);
+    }
 }
 
 export class StackController extends React.Component {
@@ -130,11 +142,31 @@ export class StackController extends React.Component {
         })
     }
 
+    popFromStack = (set) => {
+        set({opacity: 0});
+
+        // var stackClone = this.state.stackArray.slice();
+        // var bankClone = this.state.bankArray.slice();
+
+        // var poppedItem = stackClone.pop();
+        // for (var i = 0; i < bankClone.length; i++) {
+        //     if (bankClone[i] === null) {
+        //         bankClone[i] = poppedItem;
+        //         break;
+        //     }
+        // }
+
+        // this.setState({
+        //     stackArray: stackClone,
+        //     bankArray: bankClone,
+        // })
+    }
+
     render() {
         return (
             <div id="stackpageoutter">
                 <div id="stackpage">
-                    <Stack stackArray={this.state.stackArray} bankToStack={this.bankToStack} />
+                    <Stack stackArray={this.state.stackArray} bankToStack={this.bankToStack}  popFromStack={this.popFromStack}/>
                     <Bank bankArray={this.state.bankArray} />
                 </div>
             </div>
