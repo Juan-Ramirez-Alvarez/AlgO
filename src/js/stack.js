@@ -102,7 +102,7 @@ function Stack(props){
     })
     return (
         <div ref={drop} id="builtStack">
-            <ListGroup>
+            <ListGroup id="temp">
                 {listItems}
             </ListGroup>
         </div>

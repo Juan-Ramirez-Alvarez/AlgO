@@ -24,6 +24,18 @@ body {
     bottom: 0;
 }
 
+#stackpage #builtStack {
+    /* height: 60%; */
+    position: relative;
+}
+
+#temp {
+    /* height: 400px; */
+    /* overflow: scroll; */
+    position: absolute;
+    bottom:0
+}
+
 #mainapp #footer {
     height: 10%;
 }
@@ -34,6 +46,7 @@ body {
     border-style: solid !important;
     border-width: 1px !important;
     border-color: green !important;
+    /* max-height: 10%; */
 }
 
 .banktable {
