@@ -77,8 +77,10 @@ function BankItem(props){
     );
 }
 
+var isInitialized = 0;
+
 function Stack(props){
-    const [{ isOver, canDrop }, drop] = useDrop({
+    const [{trash1, trash2}, drop] = useDrop({
         accept: ItemTypes.BANKITEM,
         drop: item => props.bankToStack(item.index),
         collect: mon => ({
@@ -86,19 +88,23 @@ function Stack(props){
           canDrop: !!mon.canDrop(),
         }),
       })
+    console.log(trash1,trash2);
 
     var listItems = []
     var keyIndex = 0;
 
-    const [properties, set, stop] = useSpring(() => ({opacity: 1}))
+    const [properties, set] = useSpring(() => (
+        {
+            opacity: 1, 
+            onRest: () => AnimateAndPop()
+        }))
     props.stackArray.slice().reverse().forEach(function(x) {
         // item pushed before it gets identifier removed
         // give it to the item we are pushing on the list
-        set({opacity: 1});
         var lastItemButton = null;
         if (keyIndex === 0) {
-            lastItemButton = <button onClick={() => AnimateAndPop()}>click me</button>
-            listItems.push(<animated.div style={properties}>
+            lastItemButton = <button onClick={() => setFunc()}>click me</button>
+            listItems.push(<animated.div>
                 <ListGroup.Item className="stackItem" key={keyIndex++}>{x}{lastItemButton}</ListGroup.Item>
                 </animated.div>);
         }
@@ -115,9 +121,21 @@ function Stack(props){
         </div>
     );
 
+    function setFunc() {
+        set({opacity: 0})
+    }
+
     function AnimateAndPop ()
     {
-        props.popFromStack(set);
+        if (isInitialized > 0) {
+            console.log("here123")
+            
+            alert("hello")
+            set({opacity: 1});
+            props.popFromStack();            
+        }
+
+        isInitialized += 1;
     }
 }
 
@@ -142,24 +160,22 @@ export class StackController extends React.Component {
         })
     }
 
-    popFromStack = (set) => {
-        set({opacity: 0});
+    popFromStack = () => {
+        var stackClone = this.state.stackArray.slice();
+        var bankClone = this.state.bankArray.slice();
 
-        // var stackClone = this.state.stackArray.slice();
-        // var bankClone = this.state.bankArray.slice();
+        var poppedItem = stackClone.pop();
+        for (var i = 0; i < bankClone.length; i++) {
+            if (bankClone[i] === null) {
+                bankClone[i] = poppedItem;
+                break;
+            }
+        }
 
-        // var poppedItem = stackClone.pop();
-        // for (var i = 0; i < bankClone.length; i++) {
-        //     if (bankClone[i] === null) {
-        //         bankClone[i] = poppedItem;
-        //         break;
-        //     }
-        // }
-
-        // this.setState({
-        //     stackArray: stackClone,
-        //     bankArray: bankClone,
-        // })
+        this.setState({
+            stackArray: stackClone,
+            bankArray: bankClone,
+        })
     }
 
     render() {
